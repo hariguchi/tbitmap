@@ -35,8 +35,10 @@
  *   warning: dereferencing type-punned pointer will break
  *   strict-aliasing rules [-Wstrict-aliasing]
  * but this is intentional.
+ * Suppress -Wunused-function (it is inline)
  */
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic ignored "-Wunused-function"
 
 
 #define ALLOC_MEM(_arg0_, _size_) malloc((_size_))
@@ -471,7 +473,7 @@ tBitMapIsSet (tBitMap* pMap, u32 bitPos)
     if (!pl2) {
         return FALSE;
     }
-    pos = bitPos & (~((~0) << 5));
+    pos = bitPos & (~(((u32)(~0)) << 5));
     pos = 1 << pos;
     if (pl2->bitmap[l2i] & pos) {
         return TRUE;
