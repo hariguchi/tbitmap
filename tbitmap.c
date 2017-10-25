@@ -30,6 +30,14 @@
 #include <string.h>
 #include "tbitmap.h"
 
+/*
+ * writePtrTag() produces the following warning:
+ *   warning: dereferencing type-punned pointer will break
+ *   strict-aliasing rules [-Wstrict-aliasing]
+ * but this is intentional.
+ */
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+
 
 #define ALLOC_MEM(_arg0_, _size_) malloc((_size_))
 #define FREE_MEM(_arg0_, _ptr_)   free((_ptr_))
